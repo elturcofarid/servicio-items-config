@@ -1,0 +1,155 @@
+spring:
+    sleuth:
+     sampler:
+      probability: 1.0
+    zipkin:
+     base-url: http://192.168.0.6:9411/
+    cloud:
+         gateway:
+            globalcors:
+                corsConfigurations:
+                  '[/**]':
+                    allowedOrigins: "*"
+                    allowed-methods:
+                    - "*"
+                    allowed-headers:
+                    - "*"
+                    allow-credentials: true
+
+            routes:
+            - id: toures-balon-usuario
+              uri: lb://TOURES-BALON-USUARIO #http://172.17.0.6:9091
+              predicates:
+              - Path=/usuario/**
+            - id: toures-balon-producto-hospedaje
+              uri: lb://TOURES-BALON-PRODUCTO-HOSPEDAJE #http://172.17.0.6:9091
+              predicates:
+              - Path=/producto/hospedaje/**
+            - id: toures-balon-oauth
+              uri: lb://TOURES-BALON-OAUTH
+              predicates:
+              - Path=/oauth/**
+            - id: toures-balon-producto-ciudad
+              uri: lb://TOURES-BALON-PRODUCTO-CIUDAD
+              predicates:
+              - Path=/producto/ciudad/**
+            - id: touresbalon-producto-evento
+              uri: lb://TOURESBALON-PRODUCTO-EVENTO
+              predicates:
+              - Path=/producto/evento/**  
+            - id: touresbalon-producto-transporte
+              uri: lb://TOURESBALON-PRODUCTO-TRANSPORTE
+              predicates:
+              - Path=/producto/transporte/**
+            - id: touresbalon-proveedor-hospedaje
+              uri: lb://TOURESBALON-PROVEEDOR-HOSPEDAJE
+              predicates:
+              - Path=/proveedor/hospedaje,/proveedor/hospedaje/plantilla-consulta,/proveedor/hospedaje/auth
+            - id: touresbalon-proveedor-hospedaje-disponibilidad
+              uri: lb://TOURESBALON-PROVEEDOR-HOSPEDAJE-DISPONIBILIDAD
+              predicates:
+              - Path=/proveedor/hospedaje/disponibilidad/**
+            - id: touresbalon-proveedor-vuelo
+              uri: lb://TOURESBALON-PROVEEDOR-VUELO
+              predicates:
+              - Path=/proveedor/vuelo,/proveedor/vuelo/plantilla-consulta,/proveedor/vuelo/auth
+            - id: touresbalon-proveedor-vuelo-disponibilidad
+              uri: lb://TOURESBALON-PROVEEDOR-VUELO-DISPONIBILIDAD
+              predicates:
+              - Path=/proveedor/vuelo/disponibilidad/**  
+            - id: touresbalon-proveedor-evento
+              uri: lb://TOURESBALON-PROVEEDOR-EVENTO
+              predicates:
+              - Path=/proveedor/evento,/proveedor/evento/plantilla-consulta,/proveedor/evento/auth
+            - id: touresbalon-proveedor-evento-disponibilidad
+              uri: lb://TOURESBALON-PROVEEDOR-EVENTO-DISPONIBILIDAD
+              predicates:
+              - Path=/proveedor/evento/disponibilidad/**  
+            - id: touresbalon-proveedor-terrestre
+              uri: lb://TOURESBALON-PROVEEDOR-TERRESTRE
+              predicates:
+              - Path=/proveedor/terrestre,/proveedor/terrestre/plantilla-consulta,/proveedor/terrestre/auth
+            - id: touresbalon-proveedor-terrestre-disponibilidad
+              uri: lb://TOURESBALON-PROVEEDOR-TERRESTRE-DISPONIBILIDAD
+              predicates:
+              - Path=/proveedor/terrestre/disponibilidad/**  
+            - id: toures-balon-configuracion
+              uri: lb://TOURES-BALON-CONFIGURACION
+              predicates:
+              - Path=/configuracion/**
+            - id: toures-balon-carro
+              uri: lb://TOURES-BALON-CARRO
+              predicates:
+              - Path=/carro/**  
+            - id: toures-balon-campana
+              uri: lb://TOURES-BALON-CAMPANA
+              predicates:
+              - Path=/campana/**  
+            - id: toures-balon-orden
+              uri: lb://TOURES-BALON-ORDEN
+              predicates:
+              - Path=/orden/**  
+            - id: toures-balon-usuario-categoria
+              uri: lb://TOURES-BALON-USUARIO-CATEGORIA
+              predicates:
+              - Path=/categoria/**,/categoria/beneficio/**,/categoria/transaccion/**
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.0.6:8761/eureka
+  instance:
+    prefer-ip-address: true
+oauth:
+  enabled: true
+  jwt:
+    issuer: angular
+    password: droptable2020..
+    exclude-matchers:
+    - method: POST
+      paths:
+      - /oauth/token
+      - /usuario
+      - \/configuracion.*
+      - \/carro.*
+      - \/campana.*
+      - \/orden.*
+      - \/categoria.*
+      - \/beneficio.*
+      - \/transaccion.*
+    - method: GET
+      paths:
+      - \/configuracion.*
+      - \/carro.*
+      - \/campana.*
+      - \/proveedor.*
+      - \/orden.*
+      - \/categoria.*
+      - \/beneficio.*
+      - \/transaccion.*
+    - method: PUT
+      paths:
+      - \/configuracion.*
+      - \/proveedor.*
+      - \/categoria.*
+      - \/beneficio.*
+      - \/transaccion.*
+    - method: DELETE
+      paths:
+      - \/configuracion.*
+      - \/carro.*
+      - \/categoria.*
+      - \/beneficio.*
+      - \/transaccion.*
+    matchers-with-role:
+    - method: GET
+      paths:
+      - \/usuario.*
+      - \/producto.*
+      roles:
+        - ROLE_ADMIN
+    - method: POST
+      paths:
+      - \/usuario.*
+      - \/producto.*
+      roles:
+        - ROLE_ADMIN

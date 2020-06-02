@@ -19,4 +19,4 @@ eureka:
   instance:
     hostname: localhost
 server:
-  port: 8989
+  port: 9980

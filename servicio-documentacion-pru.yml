@@ -4,7 +4,7 @@ server:
  
 eureka:
   instance:
-    appname: documentation-application
+    appname: servicio-documentacion
   client:
     enabled: true
     register-with-eureka: true

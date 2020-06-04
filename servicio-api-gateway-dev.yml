@@ -1,6 +1,6 @@
 spring:
   application:
-    name: API-GATEWAY
+    name: servicio-api-gateway
   cloud:
     gateway:
       routes:
@@ -16,7 +16,7 @@ eureka:
     service-url:
       defaulZone: http://localhost:8761/eureka/
       
-  instance:
-    hostname: localhost
+ # instance:
+ #   hostname: localhost
 server:
   port: 9980

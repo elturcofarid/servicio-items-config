@@ -15,6 +15,9 @@ eureka:
     fetch-registry: true
     service-url:
       defaulZone: http://servicio-eureka:8761/eureka/
+      
+   instance:
+       instance-id : ${spring.application.name}:${spring.application.instance_id:9980}
   
    
 server:

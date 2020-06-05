@@ -16,7 +16,6 @@ eureka:
     service-url:
       defaulZone: http://SERVICIO-EUREKA:8761/eureka/
       
-   #instance:
-    #hostname: localhost
+   
 server:
   port: 9981

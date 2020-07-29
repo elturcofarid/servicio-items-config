@@ -17,6 +17,6 @@ eureka:
       defaulZone: http://servicio-eureka:8761/eureka/
       
  instance:
-   hostname: localhost
+   hostname: servicio-api-gateway
 server:
   port: 9980

@@ -14,7 +14,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaulZone: http://servicio-eureka:8761/eureka/
+      defaulZone: http://eureka-server:8761/eureka/
       
  instance:
    hostname: servicio-api-gateway

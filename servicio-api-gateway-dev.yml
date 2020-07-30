@@ -7,8 +7,8 @@ spring:
   cloud:
     gateway:
       routes:
-       - id: servicio-redis
-         uri: lb://servicio-redis
+       - id: prueba-server
+         uri: lb://prueba-server
          predicates:
            - Path=/redis/**
    

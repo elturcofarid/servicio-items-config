@@ -4,8 +4,8 @@ spring:
   cloud:
     gateway:
       routes:
-       - id: servicio-prueba
-         uri: lb://servicio-prueba
+       - id: prueba-server
+         uri: lb://prueba-server
          predicates:
            - Path=/redis/**
 
